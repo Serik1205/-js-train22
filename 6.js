@@ -12,11 +12,11 @@ class AuthProcessor {
 	//validate Метод для перевірки аутентифікації. Приймає ім'я користувача (username) і пароль (passkey).
 	validate(username, passkey) {
 		if (this.nextProcessor) {
-			this.nextProcessor.validate(username, passkey);
 			return this.nextProcessor.validate(username, passkey);
 		} else {
-			return false
+			return false;
 		}
+
 	}
 	// Перевіряє, чи є наступний обробник в ланцюгу.
 	// Якщо так, передає запит на перевірку аутентифікації наступному обробнику,this.nextProcessor.validate(username, passkey), та повертаємо результат.
@@ -97,7 +97,7 @@ class ProcessorBuilder {
 		this.lastProcessor = null;
 	}
 	add(processor) {
-		if (this.firstProcessor) {
+		if (!this.firstProcessor) {
 			this.firstProcessor = processor;
 			this.lastProcessor = processor;
 		} else {
@@ -105,7 +105,6 @@ class ProcessorBuilder {
 			this.lastProcessor = processor;
 		}
 		return this;
-
 	}
 	create() {
 		return this.firstProcessor;
